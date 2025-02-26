@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-be",
+  "version": "1.0.0",
+  "description": "nil",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run lint && npm run build && npm run start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
