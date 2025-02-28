@@ -7,8 +7,8 @@ const apiRouter = express.Router()
 
 function createRouterGroup(path) {
     const routerGroup = express.Router()
-    apiRouter.use("/path", routerGroup)
-    return router
+    apiRouter.use(path, routerGroup)
+    return routerGroup
 }
 
 function initRouterGroup() {
