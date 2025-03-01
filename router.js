@@ -1,6 +1,7 @@
 const express = require("express")
 const errorhandler = require("./middleware/errorhandler")
 const logger = require("./middleware/logger")
+const handler = require("./handlers/init")
 
 const router = express.Router()
 const apiRouter = express.Router()
@@ -12,9 +13,11 @@ function createRouterGroup(path) {
 }
 
 function initRouterGroup() {
+    router.use(express.json())
     router.use("/api", apiRouter)
     router.use("/", errorhandler)
     router.use("/", logger)
+
 
     // example
     const exampleRouter = createRouterGroup("/example")
@@ -28,9 +31,15 @@ function initRouterGroup() {
         exampleRouter.get("/error", (req, res) => {
             throw new Error("This is an error")
         })
+
+        passageRouter = createRouterGroup("/passage")
+        {
+            passageRouter.get("/:id", handler.passage.getPassage) // 获取文章
+            passageRouter.post("/", handler.passage.createPssage) // 创建文章
+            passageRouter.delete("/:id", handler.passage.deletePassage) // 
+        }
     }
 }
-
 
 initRouterGroup()
 module.exports = router
