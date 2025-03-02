@@ -14,11 +14,18 @@ npm run dev
 ## 目录结构
 
 ├── global 全局变量
-├── handlers 路由处理函数 
+
+├── handlers 路由处理函数
+
 ├── middleware 中间件
+
 ├── model 数据库相关
+
 ├── public 公开资源
+
 ├── uploads 上传资源
+
 ├── router.js 注册路由在这里
+
 └── app.js 应用级设置在这里
 
