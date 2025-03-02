@@ -1,10 +1,12 @@
 const express = require("express")
-const errorhandler = require("./middleware/errorhandler")
-const logger = require("./middleware/logger")
+const midware = require("./middleware/init")
 const handler = require("./handlers/init")
+const multer = require("multer")
 
 const router = express.Router()
 const apiRouter = express.Router()
+const upload = multer({ storage: multer.memoryStorage() }) // 内存存储
+
 
 function createRouterGroup(path) {
     const routerGroup = express.Router()
@@ -15,8 +17,8 @@ function createRouterGroup(path) {
 function initRouterGroup() {
     router.use(express.json())
     router.use("/api", apiRouter)
-    router.use("/", errorhandler)
-    router.use("/", logger)
+    router.use("/", midware.errorhandler)
+    router.use("/", midware.logger)
 
 
     // example
@@ -27,16 +29,12 @@ function initRouterGroup() {
         })
         // end 
 
-        // errorhandlerexample
-        exampleRouter.get("/error", (req, res) => {
-            throw new Error("This is an error")
-        })
 
         passageRouter = createRouterGroup("/passage")
         {
             passageRouter.get("/:id", handler.passage.getPassage) // 获取文章
-            passageRouter.post("/", handler.passage.createPssage) // 创建文章
-            passageRouter.delete("/:id", handler.passage.deletePassage) // 
+            passageRouter.post("/", midware.isformdata, upload.single("file"), handler.passage.createPssage) // 创建文章
+            passageRouter.delete("/:id", handler.passage.deletePassage) // 删除文章
         }
     }
 }
