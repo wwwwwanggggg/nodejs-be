@@ -15,7 +15,7 @@ function logger(req, res, next) {
     }
 
 
-    console.log(`${global.formatOutput.blueBackground}${global.formatOutput.whiteText} ${req.method} ${global.formatOutput.resetStyle}   ${req.url}  ` + codetext);
+    console.log(`${global.formatOutput.greenBackground}${global.formatOutput.whiteText} ${req.method} ${global.formatOutput.resetStyle}   ${req.url}  ` + codetext);
     next();
 }
 

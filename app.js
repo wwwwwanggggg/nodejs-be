@@ -12,6 +12,10 @@ app.use((req, res, next) => {
     next()
 })
 
+// 配置静态资源
+app.set('view engine', 'ejs');
+
+
 
 initDB()
 
