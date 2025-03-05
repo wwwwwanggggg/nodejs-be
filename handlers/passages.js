@@ -3,6 +3,7 @@ const fs = require("fs")
 const markdownIt = require("markdown-it")
 const markdownItKatex = require('markdown-it-katex');
 const mdhighlight = require('markdown-it-highlightjs')
+const vl = require('./validator/init')
 
 const md = markdownIt().use(markdownItKatex).use(mdhighlight)
 
@@ -69,18 +70,34 @@ module.exports = {
         }
     },
     async getPassageAll(req, res) {
+        console.log(vl.checkPageForm(req))
+        if (!vl.checkPageForm(req)) {
+            res.status(400).json({
+                code: 400,
+                message: "请传入正确的page和limit"
+            })
+            return
+        }
+        const page = Number(req.query.page)
+        const limit = Number(req.query.limit)
         try {
-            const passages = await Passage.findAll()
-            if (passages.length === 0) {
-                res.status(404).json({
-                    code: 404,
-                    message: "未找到文章"
+            const { count, rows } = await Passage.findAndCountAll({
+                limit: limit,
+                offset: (page - 1) * limit,
+            })
+            if (count > 0) {
+                res.status(200).json({
+                    code: 200,
+                    message: "成功查询",
+                    passages: rows,
+                    total: count,
                 })
             } else {
                 res.status(200).json({
                     code: 200,
-                    message: "获取成功",
-                    data: passages
+                    message: "没有数据",
+                    passages: [],
+                    total: 0,
                 })
             }
         } catch (err) {

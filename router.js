@@ -33,10 +33,11 @@ function initRouterGroup() {
 
         passageRouter = createRouterGroup("/passage")
         {
-            passageRouter.get("/html/:id", handler.passage.getPassage) // 获取文章渲染
+            passageRouter.get("/list", handler.passage.getPassageAll) // 获取文章列表
+            passageRouter.delete("/:id", handler.passage.deletePassage) // 删除文章
+            passageRouter.get("/html/:id(\\d+)", handler.passage.getPassage) // 获取文章渲染
             passageRouter.get("/:id", handler.passage.getPassageContent) // 获取文章目录，内容
             passageRouter.post("/", midware.isformdata, upload.single("file"), handler.passage.createPssage) // 创建文章
-            passageRouter.delete("/:id", handler.passage.deletePassage) // 删除文章
         }
     }
 }
