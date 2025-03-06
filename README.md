@@ -13,19 +13,24 @@ npm run dev
 
 ## 目录结构
 
+├── app.js 服务端程序入口
 ├── global 全局变量
-
-├── handlers 路由处理函数
-
+│   
+├── handlers 路由处理
+│   ├── init.js 初始化
+│   └── validator 参数校验
+│       └── init.js 初始化
 ├── middleware 中间件
-
-├── model 数据库相关
-
-├── public 公开资源
-
+│   ├── errorhandler.js 错误处理中间件
+│   ├── init.js 
+│   └── logger.js 日志中间件
+├── model 数据库模型
+│   └── models.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── router.js 路由注册
+├── static 静态资源
 ├── uploads 上传资源
-
-├── router.js 注册路由在这里
-
-└── app.js 应用级设置在这里
+└── views 渲染视图
 
