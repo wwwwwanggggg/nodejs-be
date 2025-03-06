@@ -1,12 +1,13 @@
 const express = require("express")
 const midware = require("./middleware/init")
 const handler = require("./handlers/init")
-const multer = require("multer")
 
 const router = express.Router()
 
 const apiRouter = express.Router()
-const upload = multer({ storage: multer.memoryStorage() }) // 内存存储
+// 配置 multer 以原始文件名存储到up
+
+
 
 
 function createRouterGroup(path) {
@@ -22,7 +23,7 @@ function initRouterGroup() {
     router.use("/", midware.logger)
 
 
-    // example
+
     const exampleRouter = createRouterGroup("/example")
     {
         exampleRouter.get("/", (req, res) => {
@@ -30,16 +31,8 @@ function initRouterGroup() {
         })
         // end 
 
-
-        passageRouter = createRouterGroup("/passage")
-        {
-            passageRouter.get("/list", handler.passage.getPassageAll) // 获取文章列表
-            passageRouter.delete("/:id", handler.passage.deletePassage) // 删除文章
-            passageRouter.get("/html/:id(\\d+)", handler.passage.getPassage) // 获取文章渲染
-            passageRouter.get("/:id", handler.passage.getPassageContent) // 获取文章目录，内容
-            passageRouter.post("/", midware.isformdata, upload.single("file"), handler.passage.createPssage) // 创建文章
-        }
     }
+
 }
 
 initRouterGroup()

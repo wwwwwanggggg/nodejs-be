@@ -36,13 +36,9 @@ const Passage = sequelize.define('passages', {
     coverPath: {
         type: Sequelize.STRING,
         allowNull: true,
-        comment: "封面",
+        comment: "封面 ",
         defaultValue: null
     },
-    nav: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }
 })
 
 async function initDB() {
