@@ -2,6 +2,8 @@
 
 这是一个简单的express二次封装的框架，在很大程度上借鉴了tz-gin的结构，所以大家快去给[tz-gin](https://github.com/xjtu-tenzor/tz-gin-template)点个star吧
 
+近期有其他事情做，暂时不会更新这个
+
 ## 如何使用
 
 启动
@@ -13,6 +15,7 @@ npm run dev
 
 ## 目录结构
 
+```
 ├── app.js 服务端程序入口
 ├── global 全局变量
 │   
@@ -33,4 +36,5 @@ npm run dev
 ├── static 静态资源
 ├── uploads 上传资源
 └── views 渲染视图
+```
 
